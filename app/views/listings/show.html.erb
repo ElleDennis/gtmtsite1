@@ -1,0 +1,26 @@
+<div class="topbar">
+  <div class="container">
+    <div class="vertical-center">
+      <%= link_to 'Get This, Make That', root_path %> > Materials Share 
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div>
+    <button type="button">reply</button>
+    posted <%= time_ago_in_words(@listing.created_at) %>
+    <h1 class="listing-header"><%= @listing.title %></h1>
+    <div class="box">
+      <% if @listing.user = current_user %>
+        <p><%= link_to 'Edit', edit_listing_path %></p>
+        <p><%= link_to 'Delete', @listing, data: {confirm: "Are you sure you want to delete this listing?"}, method: :delete %></p>
+      <% end %>
+    </div>
+    <p><%= @listing.description %></p>
+  </div>
+  <footer>
+    <p>post id: <%= @listing.id %></p>
+    <p>posted <%= time_ago_in_words(@listing.created_at) %></p>
+  </footer> 
+</div>
+

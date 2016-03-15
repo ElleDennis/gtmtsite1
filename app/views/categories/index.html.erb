@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="leftbar"><br>
+    <a href="#"><h1><font color="#B00000">Get This, Make That</font color="B800000"></h1></a><br>
+    <h3><center>A marketplace for do-it-yourself materials for home and garden.<center</></h3><br>
+    <ol>
+       <li><center><%= link_to 'Post Ad', new_listing_path %></center></ul>
+      <% if user_signed_in? %>
+        <li><%= link_to 'My Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to 'My Listings', mylistings_path %></li>
+      <% else %>
+          <li><center><%= link_to 'Sign in', new_user_session_path %></center></li>
+          <li><center><%= link_to 'Sign up', new_user_registration_path %></center></li>
+      <% end %>
+    </ol>
+      <%= form_tag search_listings_path, method: :get do |f| %>
+        <p>Search Get This, Make That</p>
+        <%= text_field_tag :search, nil, placeholder: 'Search' %>
+        <%= text_field_tag :location, nil, placeholder: 'Near' %>
+        <%= select_tag :category, options_for_select(Category.all.map{ |c| [c.name, c.id]}) %>
+        <%= submit_tag 'Submit' %>
+      <% end %>
+  </div>
+  <div class="center-column">
+    <div class="center-one">
+      <table>
+        <tr><br>
+        <p align="center"><%=image_tag("PaintCansLong.jpg", alt: "PaintCansLong", :width=> "500", :height=> "100") %></p align="center"><br>
+          <th class="table-header"><%= link_to 'Materials Share', category_path(@materials_share) %></th>
+        </tr>
+        <tr>
+          <td>
+            <% @materials_share.subcategories.each do |subcategory| %>
+            <ul class="left-list">
+              <li><%= link_to subcategory.name, category_subcategory_path(@materials_share, subcategory) %></li>
+            </ul>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="center-two">
+      <table>
+        <tr><br>
+        <p align="center"><%=image_tag("PaintCansLong.jpg", alt: "PaintCansLong", :width=> "500", :height=> "100") %></p align="center"><br>
+           <th class="table-header"><%= link_to 'For Sale', category_path(@for_sale) %></th>
+        </tr>
+        <tr>
+          <td>
+            <% @for_sale.subcategories.each do |subcategory| %>
+              <ul>
+                <li><%= link_to subcategory.name, category_subcategory_path(@for_sale, subcategory) %></li>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </div>
+     <div class="rightbar">
+      <div class="rightbar-top"><br>
+      <ul class="left-list">
+      <li><%= link_to 'Help & Faq', help_path %></li>
+      <li><%= link_to 'Avoid scams & Fraud', scams_path %></li>
+      <li><%= link_to 'Personal safety tips', safety_path %></li>
+      <div class="rightbar-top">
+      <li><%= link_to 'Terms of use', terms_path %></li>
+      <li><%= link_to 'Privacy policy', privacy_path %></li>
+      <li><%= link_to 'About Get This, Make That', about_path %></li>
+      <li><%= link_to 'Contact Get This, Make That', contact_path %></li>
+    </ul>
+  </div><br>
+   <p><center><a href="#"><h1><font color="B800000">Get This, Make That</font color="B800000"></h1></a></center></p><br>
+</div>
+
